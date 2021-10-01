@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>The Blog</h1>
+
+<!-- the |striptags on the text helps to hide the HTML tags used in the text.  -->
+
+
+<h3>{{ blogs.count }} blog{{ blogs.count|pluralize }}</h3>
+
+<a href="{% url 'portfolio' %}">Home</a>
+<br>
+
+{% for blog in blogs %}
+	<a href = "{% url 'blog:detail' blog.id %}"><h2>{{ blog.title }}</h2></a>
+	<p>{{ blog.date|date:'M d Y' }}</p>
+	<h4>{{ blog.text|striptags|truncatechars:100 }}</h4>
+	
+{% endfor %}
+{% endblock %}
